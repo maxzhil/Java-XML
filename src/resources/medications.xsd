@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:medicine="http://www.w3.org/2001/medicine" targetNamespace="http://www.w3.org/2001/medicine">
+
+	<xs:simpleType name="name">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:complexType name="pharm">
+		<xs:sequence>
+			<xs:element name="certificate" type="medicine:certifecate" />
+			<xs:element name="packet" type="medicine:package" />
+			<xs:element name="dosage" type="medicine:dosage" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="group">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANTIBIOTICS" />
+			<xs:enumeration value="PAINKILLERS" />
+			<xs:enumeration value="VITAMINS" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="versions">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PILLS" />
+			<xs:enumeration value="CAPSULES" />
+			<xs:enumeration value="POWDER" />
+			<xs:enumeration value="DROPS" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="analogs">
+		<xs:sequence>
+			<xs:element name="analog" type="xs:string" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="package">
+		<xs:sequence>
+			<xs:element name="type" type="string" />
+			<xs:element name="count" type="integer" />
+			<xs:element name="price" type="integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="certifecate">
+		<xs:sequence>
+			<xs:element name="number" type="integer" />
+			<xs:element name="date-of-issue" type="xs:gYear" />
+			<xs:element name="expiration-date" type="xs:gYear" />
+			<xs:element name="organization" type="string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="dosage">
+		<xs:sequence>
+			<xs:element name="frequency-of-admission" type="integer" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="medicineType">
+		<xs:sequence>
+			<xs:element name="name" type="medicine:name" maxOccurs="1" />
+			<xs:element name="pharm" type="medicine:pharm" maxOccurs="unbounded"
+				minOccurs="1" />
+			<xs:element name="group" type="medicine:group" maxOccurs="1" />
+			<xs:element name="analogs" type="medicine:analogs" />
+			<xs:element name="versions" type="medicine:versions"
+				maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="medicationsType">
+		<xs:sequence>
+			<xs:element name="Medicine" type="medicine:medicineType"
+				maxOccurs="unbounded" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Medications" type="medicine:medicationsType" />
+
+</xs:schema>
