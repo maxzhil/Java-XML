@@ -12,7 +12,7 @@
 			<packet>
 				<type>Solid</type>
 				<count>10</count>
-				<price>344</price>
+				<price>700</price>
 			</packet>
 			<dosage>
 				<frequency-of-admission>4</frequency-of-admission>
@@ -37,7 +37,7 @@
 			<packet>
 				<type>Solid</type>
 				<count>23</count>
-				<price>344</price>
+				<price>800</price>
 			</packet>
 			<dosage>
 				<frequency-of-admission>9</frequency-of-admission>

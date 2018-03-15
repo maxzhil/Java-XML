@@ -1,9 +1,11 @@
 package ru.rsreu.Zhilenko0904;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import ru.rsreu.Zhilenko0904.model.Medicine;
+import ru.rsreu.Zhilenko0904.writer.HtmlWriter;
 import ru.rsreu.Zhilenko0904.xml.parser.XmlSAXParser;
 
 public class Runner {
@@ -16,6 +18,7 @@ public class Runner {
 		StringBuilder sb = new StringBuilder();
 		String xsdPath = Resourcer.getString("runner.xsd");
 		String xmlPath = Resourcer.getString("runner.xml");
+		String htmlOutput = Resourcer.getString("runner.output.html");
 
 		XmlSAXParser parser = new XmlSAXParser();
 		try {
@@ -46,8 +49,17 @@ public class Runner {
 
 			e.printStackTrace();
 		}
+		sb.append(FileWorker.getList(medications)).append('\n')
+				.append(Resourcer.getString("runner.message.sorted"))
+				.append('\n');
+		Collections.sort(medications, Comparators.sortByPrice);
 		sb.append(FileWorker.getList(medications));
+		HtmlWriter htmlWriter = new HtmlWriter();
+		try {
+			htmlWriter.write(medications, htmlOutput);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println(sb.toString());
 	}
-
 }

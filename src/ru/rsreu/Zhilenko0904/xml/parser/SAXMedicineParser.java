@@ -22,7 +22,7 @@ public class SAXMedicineParser extends DefaultHandler {
 	private Dosage dosage;
 	private String tagName = EMPTY_STRING;
 	private String attribute = EMPTY_STRING;
-	private Calendar calendar = Calendar.getInstance();
+	private Calendar calendar;
 	private Tag tag = null;
 
 	public SAXMedicineParser() {
@@ -74,10 +74,12 @@ public class SAXMedicineParser extends DefaultHandler {
 			certificate.setNumber(Integer.parseInt(value));
 			break;
 		case DATEOFISSUE:
+			calendar = Calendar.getInstance();
 			calendar.set(Calendar.YEAR, Integer.parseInt(value));
 			certificate.setDateOfIssue(calendar);
 			break;
 		case EXPIRATIONDATE:
+			calendar = Calendar.getInstance();
 			calendar.set(Calendar.YEAR, Integer.parseInt(value));
 			certificate.setExpirationDate(calendar);
 			break;
