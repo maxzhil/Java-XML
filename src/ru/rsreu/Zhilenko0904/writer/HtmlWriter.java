@@ -50,10 +50,10 @@ public class HtmlWriter {
 	private Element createHead() {
 		Element head = document.createElement("head");
 		Element title = document.createElement("title");
-		title.setTextContent("Flowers");
+		title.setTextContent("Medicine");
 		Element style = document.createElement("style");
 		style.setTextContent("td, th {" + "    text-align: center;\n"
-				+ "    padding: 10px;\n" + "    vertical-align: middle;" + "}"
+				+ "    padding: 20px;\n" + "    vertical-align: middle;" + "}"
 				+ "h1 { text-align: center; }"
 				+ "table { width: 100%;border-collapse: collapse; }");
 		head.appendChild(style);
@@ -65,7 +65,7 @@ public class HtmlWriter {
 			throws TransformerException, ParserConfigurationException {
 		Element element = createTable(elements);
 		Element h1 = document.createElement("h1");
-		h1.setTextContent("Flowers");
+		h1.setTextContent("Medicine");
 		Element body = document.createElement("body");
 		body.appendChild(h1);
 		body.appendChild(element);
@@ -119,7 +119,7 @@ public class HtmlWriter {
 		return table;
 	}
 
-	private void pushMedicineTd(Element tr, String value) {
+	private void insertMedicineValueToTd(Element tr, String value) {
 		Element td = document.createElement("td");
 		td.setTextContent(value);
 		tr.appendChild(td);
@@ -129,33 +129,33 @@ public class HtmlWriter {
 		Element tr = document.createElement("tr");
 		tr.setAttribute("id", Integer.toString(medicine.getId()));
 
-		pushMedicineTd(tr, medicine.getName());
-		pushMedicineTd(
+		insertMedicineValueToTd(tr, medicine.getName());
+		insertMedicineValueToTd(
 				tr,
 				Integer.toString(medicine.getPharm().getCertificat()
 						.getNumber()));
-		pushMedicineTd(
+		insertMedicineValueToTd(
 				tr,
 				Integer.toString(medicine.getPharm().getCertificat()
 						.getDateOfIssue().get(Calendar.YEAR)));
-		pushMedicineTd(
+		insertMedicineValueToTd(
 				tr,
 				Integer.toString(medicine.getPharm().getCertificat()
 						.getExpirationDate().get(Calendar.YEAR)));
-		pushMedicineTd(tr, medicine.getPharm().getCertificat()
+		insertMedicineValueToTd(tr, medicine.getPharm().getCertificat()
 				.getOrganization());
-		pushMedicineTd(tr, medicine.getPharm().getPacket().getType());
-		pushMedicineTd(tr,
+		insertMedicineValueToTd(tr, medicine.getPharm().getPacket().getType());
+		insertMedicineValueToTd(tr,
 				Integer.toString(medicine.getPharm().getPacket().getCount()));
-		pushMedicineTd(tr,
+		insertMedicineValueToTd(tr,
 				Integer.toString(medicine.getPharm().getPacket().getPrice()));
-		pushMedicineTd(
+		insertMedicineValueToTd(
 				tr,
 				Integer.toString(medicine.getPharm().getDosage()
 						.getFrequencyOfAdmission()));
-		pushMedicineTd(tr, medicine.getGroup().toString());
-		pushMedicineTd(tr, FileWorker.getList(medicine.getAnalogs()));
-		pushMedicineTd(tr, medicine.getVersions().toString());
+		insertMedicineValueToTd(tr, medicine.getGroup().toString());
+		insertMedicineValueToTd(tr, FileWorker.getList(medicine.getAnalogs()));
+		insertMedicineValueToTd(tr, medicine.getVersions().toString());
 		return tr;
 	}
 
